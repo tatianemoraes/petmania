@@ -1,6 +1,7 @@
 import Routes from './routes/routes';
 import { ToastContainer } from 'react-toastify';
 import GlobalStyle from './style/GlobalStyle';
+import EmployeeContextProvider from './contexts/useEmployeeContext';
 
 function App() {
   return (
@@ -9,7 +10,9 @@ function App() {
       <ToastContainer
         autoClose={2000} 
       />
-      <Routes />
+      <EmployeeContextProvider>
+        <Routes />
+      </EmployeeContextProvider>
     </>
   );
 }

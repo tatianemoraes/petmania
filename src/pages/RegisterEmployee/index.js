@@ -6,7 +6,7 @@ import { Container } from './style';
 import { toast } from 'react-toastify';
 import api from '../../services/api';
 
-export default function RegisterEmployees() {
+export default function RegisterEmployee() {
 
   const [employee, setEmployee] = useState({});
 
@@ -27,12 +27,18 @@ export default function RegisterEmployees() {
       confirmPassword: employee.confirmPassword,
     }
 
-    await api.post('/users', data);
+    try {
+      await api.post('/users', data)
+      toast('Funcionário cadastrado com sucesso');
+      setEmployee({ name: '', surname: '', functionality: '', email: '', password: '', confirmPassword: '' });
+    } catch (error) {
+      toast.error(error.response.data.error.message);
+    }
+    
+  }
 
-    toast('Funcionário cadastrado com sucesso');
-
+  function cancelRegister() {
     setEmployee({ name: '', surname: '', functionality: '', email: '', password: '', confirmPassword: '' });
-
   }
 
   return (
@@ -99,7 +105,7 @@ export default function RegisterEmployees() {
           />
         </div>
         <div className="btns-form">
-          <button className="btn-cancel">Cancelar</button>
+          <button className="btn-cancel" onClick={() => cancelRegister()}>Cancelar</button>
           <button className="btn-register" onClick={(e) => handleAddUser(e)}>Registrar</button>
         </div>
       </div>
