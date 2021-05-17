@@ -1,12 +1,21 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import Header from '../../components/Header/index';
 import Footer from '../../components/Footer/index';
-import Pet from '../../assets/pet.png';
-import { Container } from './style';
 import { toast } from 'react-toastify';
 import api from '../../services/api';
+import { useHistory } from 'react-router-dom';
+import Pet from '../../assets/pet.png';
+import { Container } from './style';
 
 export default function RegisterEmployee() {
+
+  const history = useHistory();
+  
+  useEffect(() => {
+    if(!localStorage.getItem('logged')){
+      history.push('/');
+    }
+  }, [history]);
 
   const [employee, setEmployee] = useState({});
 

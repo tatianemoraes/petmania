@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../../components/Header/index'; 
 import Footer from '../../components/Footer/index';
+import { useHistory } from 'react-router-dom';
 import Pet from '../../assets/pet.png';
 
 import { Container } from './style';
 
 export default function FindPet() {
+
+  const history = useHistory();
+  
+  useEffect(() => {
+    if(!localStorage.getItem('logged')){
+      history.push('/');
+    }
+  }, [history]);
+
   return (
     <Container>
       <Header />
