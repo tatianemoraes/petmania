@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Header from '../../components/Header/index'; 
 import Footer from '../../components/Footer/index';
 import { useHistory } from 'react-router-dom';
+import headerAuth from '../../utils/headerAuth';
+import { useEmployeeContext } from '../../contexts/useEmployeeContext';
+import { toast } from 'react-toastify';
+import api from '../../services/api';
 import Pet from '../../assets/pet.png';
 
 import { Container } from './style';
@@ -9,6 +13,8 @@ import { Container } from './style';
 export default function FindPet() {
 
   const history = useHistory();
+
+  const { user } = useContext(useEmployeeContext);
   
   useEffect(() => {
     if(!localStorage.getItem('logged')){
@@ -16,13 +22,45 @@ export default function FindPet() {
     }
   }, [history]);
 
+  const [ pet, setPet ] = useState({ petName: '' });
+  const [ petSearch, setPetSearch ] = useState([]);
+
+  function handleChange(e) {
+    setPet({ ...pet, petName: e.target.value })
+  }
+
+  async function findPet(pet) {
+   
+    try {
+      const headers = headerAuth(user.token);
+      const { data } = await api.get('/pets', pet, { headers });
+      setPetSearch(data.pets);
+    } catch (error) {
+      toast(error.response.data.error); 
+    }
+  }
+
+  console.log(petSearch);
+
+  useEffect(() => {
+    if(pet.petName.length > 2) {
+      findPet(pet);
+    }
+    
+  }, [pet])
+
   return (
     <Container>
       <Header />
       <div className="form-search">
         <div className="search">
           <img src={ Pet } alt="" />
-          <input type="text" placeholder="Pesquisar Pet"/>
+          <input 
+            type="text" 
+            placeholder="Pesquisar Pet"
+            value={ pet.petName || '' }
+            onChange={(e) => handleChange(e)}
+          />
         </div>
         <div className="results">
           <h2>Bolinha</h2>
