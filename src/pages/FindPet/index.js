@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useContext } from 'react';
 import Header from '../../components/Header/index'; 
 import Footer from '../../components/Footer/index';
@@ -27,10 +28,9 @@ export default function FindPet() {
 
   function handleChange(e) {
     setPet({ ...pet, petName: e.target.value })
-  }
+  };
 
   async function findPet(pet) {
-   
     try {
       const headers = headerAuth(user.token);
       const { data } = await api.get('/pets', pet, { headers });
@@ -38,15 +38,12 @@ export default function FindPet() {
     } catch (error) {
       toast(error.response.data.error); 
     }
-  }
-
-  console.log(petSearch);
+  };
 
   useEffect(() => {
     if(pet.petName.length > 2) {
       findPet(pet);
     }
-    
   }, [pet])
 
   return (
@@ -63,14 +60,18 @@ export default function FindPet() {
           />
         </div>
         <div className="results">
-          <h2>Bolinha</h2>
-          <select name="process" id="">
-            <option value="1">Aguardando</option>
-            <option value="2">Banho</option>
-            <option value="3">Aparando o pêlo</option>
-            <option value="4">Cortando unhas</option>
-            <option value="5">Pronto e feliz</option>
-          </select>
+          { petSearch.length > 0 ? (
+            <>
+              <h2>{ petSearch[0].petName }</h2>
+              <select name="process" id="">
+                <option value="1">Aguardando</option>
+                <option value="2">Banho</option>
+                <option value="3">Aparando o pêlo</option>
+                <option value="4">Cortando unhas</option>
+                <option value="5">Pronto e feliz</option>
+              </select>
+            </>
+          ) : '' }
         </div>
       </div>
       
