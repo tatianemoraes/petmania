@@ -1,19 +1,70 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Header from '../../components/Header/index'; 
 import Footer from '../../components/Footer/index';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import HeaderAuth from '../../utils/headerAuth';
+import { useEmployeeContext } from '../../contexts/useEmployeeContext';
+
 import Pet from '../../assets/pet.png';
 import { Container } from './style';
+import api from '../../services/api';
+
 
 export default function RegisterClient() {
+
+ const { user } = useContext(useEmployeeContext);
 
   const history = useHistory();
   
   useEffect(() => {
-    if(!localStorage.getItem('logged')){
+    if(!localStorage.getItem('logged')) {
       history.push('/');
     }
   }, [history]);
+
+  const [client, setClient] = useState({});
+
+  function validateFields(event) {
+    setClient({...client, [event.target.name]:event.target.value});
+  }
+
+  async function handleAddUser(e) {
+
+    e.preventDefault(); 
+
+    const petInfo = [];
+
+    petInfo.push({ 
+      petName: client.petName,
+      petType: client.petType,
+      breed: client.breed
+    });
+
+    if(!petInfo.length > 0) {
+      return toast('Favor colocar ao menos um pet');
+    }
+
+    const data = {
+      fullname: client.fullname,
+      address: client.address,
+      email: client.email,
+      petInfo,
+    };
+
+    try {
+      const headers = HeaderAuth(user.token);
+     
+      await api.post('/clients', data, { headers } );  
+
+      toast('Cliente cadastrado(a) com sucesso');
+      setClient({ fullname: '', address: '', email: '', petName: '', petType: '', petBreed: '' });
+
+    } catch (error) {
+      toast.error(error.response.data.error.message);
+    }
+
+  }
 
   return (
     <Container>
@@ -24,16 +75,63 @@ export default function RegisterClient() {
           <h1>Registrar Cliente!</h1>
         </div>
         <div className="input-form">
-          <input className="input-client input-space" type="text" placeholder="Cliente" />
-          <input className="input-address input-space" type="text" placeholder="Endereço" />
-          <input className="input-email input-space" type="email" placeholder="Email" />
-          <input className="input-pet-name input-space" type="text" placeholder="Nome do Pet" />
-          <input className="input-pet-type input-space" type="text" placeholder="Tipo do Pet" />
-          <input className="input-pet-breed input-space" type="text" placeholder="Raça do Pet" />
+          <input 
+            className="input-client input-space" 
+            type="text" 
+            placeholder="Cliente" 
+            name="fullname"
+            onChange={(e) => validateFields(e)  || ''}
+            value={client.fullname || ''}
+          />
+          <input 
+            className="input-address input-space" 
+            type="text" 
+            placeholder="Endereço" 
+            name="address"
+            onChange={(e) => validateFields(e)  || ''}
+            value={client.address || ''}  
+          />
+          <input 
+            className="input-email input-space" 
+            type="email" 
+            placeholder="Email" 
+            name="email"
+            onChange={(e) => validateFields(e)  || ''}
+            value={client.email || ''}
+          />
+          <input 
+            className="input-pet-name input-space" 
+            type="text" 
+            placeholder="Nome do Pet" 
+            name="petName"
+            onChange={(e) => validateFields(e)  || ''}
+            value={client.petName || ''}  
+          />
+          <input 
+            className="input-pet-type input-space" 
+            type="text" 
+            placeholder="Tipo do Pet" 
+            name="petType"
+            onChange={(e) => validateFields(e)  || ''}
+            value={client.petType || ''}  
+          />
+          <input 
+            className="input-pet-breed input-space" 
+            type="text" 
+            placeholder="Raça do Pet" 
+            name="breed"
+            onChange={(e) => validateFields(e)  || ''}
+            value={client.breed || ''}  
+          />
         </div>
         <div className="btns-form">
           <button className="btn-cancel">Cancelar</button>
-          <button className="btn-register">Registrar</button>
+          <button 
+            className="btn-register"
+            onClick={(e) => handleAddUser(e)}
+          >
+            Registrar
+          </button>
         </div>
       </div>
       <Footer />
