@@ -23,8 +23,8 @@ export default function FindPet() {
     }
   }, [history]);
 
-  const [ pet, setPet ] = useState({ petName: '' });
-  const [ petSearch, setPetSearch ] = useState([]);
+  const [pet, setPet] = useState({ petName: '' });
+  const [petSearch, setPetSearch] = useState([]);
 
   function handleChange(e) {
     setPet({ ...pet, petName: e.target.value })

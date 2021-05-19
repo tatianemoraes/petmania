@@ -45,6 +45,21 @@ export const Container = styled.div`
         justify-content: center;
         display: flex;
       }
+
+      .moreInfo {
+        ul {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          list-style:none;
+          li {
+            span {
+              color: #9C7FFD;
+              font-weight:600;
+            }
+          }
+        }
+      }
       .services {
         display: flex;
         margin-top: 110px;
