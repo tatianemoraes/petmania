@@ -11,13 +11,13 @@ export default function Login() {
 
   const history = useHistory();
 
-  const { setLogin, user } = useContext(useEmployeeContext);
+  const { user, getLogin } = useContext(useEmployeeContext);
 
   const [auth, setAuth] = useState({});
 
   function handleLogin(e) {
     e.preventDefault();
-    setLogin(auth);
+    getLogin(auth);
   }
 
   useEffect(() => {
