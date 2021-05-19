@@ -11,7 +11,7 @@ export const Container = styled.div`
   .form {
     display: flex;
     flex-direction: column;
-    height: 430px;
+    height: 360px;
     width: 515px;
     margin-top: 80px;
     background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
@@ -82,19 +82,6 @@ export const Container = styled.div`
         background: #9C7FFD;
         color: #fff;
         font-size: 19px;
-        cursor: pointer;
-      }
-
-      .btn-register {
-        height: 50px;
-        width: 115px;
-        border-radius: 5px;
-        outline: none;
-        background: #fff;
-        color: #9C7FFD;
-        font-size: 19px;
-        border: 1px solid #9C7FFD;
-        margin-top: 6px;
         cursor: pointer;
       }
     }  

@@ -24,7 +24,7 @@ export default function Login() {
     if(user.email) {
       history.push('/painel/findpet');
     }
-  }, [user, history])
+  }, [user, history]);
 
   return (
     <Container>
@@ -52,7 +52,6 @@ export default function Login() {
         </div>
         <div className="btns-form">
           <button className="btn-log" onClick={(e) => handleLogin(e)}>Entrar</button>
-          <button className="btn-register">Registrar</button>
         </div>
       </div>
       <Footer />
