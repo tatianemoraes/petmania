@@ -7,6 +7,8 @@ import HeaderAuth from '../../utils/headerAuth';
 import { useEmployeeContext } from '../../contexts/useEmployeeContext';
 
 import Pet from '../../assets/pet.png';
+import { AiOutlinePlusSquare } from 'react-icons/ai';
+import { AiFillMinusSquare } from 'react-icons/ai';
 import { Container } from './style';
 import api from '../../services/api';
 
@@ -99,30 +101,113 @@ export default function RegisterClient() {
             onChange={(e) => validateFields(e)  || ''}
             value={client.email || ''}
           />
-          <input 
-            className="input-pet-name input-space" 
-            type="text" 
-            placeholder="Nome do Pet" 
-            name="petName"
-            onChange={(e) => validateFields(e)  || ''}
-            value={client.petName || ''}  
-          />
-          <input 
-            className="input-pet-type input-space" 
-            type="text" 
-            placeholder="Tipo do Pet" 
-            name="petType"
-            onChange={(e) => validateFields(e)  || ''}
-            value={client.petType || ''}  
-          />
-          <input 
-            className="input-pet-breed input-space" 
-            type="text" 
-            placeholder="Raça do Pet" 
-            name="breed"
-            onChange={(e) => validateFields(e)  || ''}
-            value={client.breed || ''}  
-          />
+          <div className="add-pet">
+            <button className="btn-add">
+              <AiOutlinePlusSquare size="15" />
+            </button>
+            <h2>Adicionar Pet</h2>
+          </div>
+          <div className="list-pet">
+            <div className="item-pet">
+              <div className="content-pet-name">
+                <button className="delete-pet">
+                  <AiFillMinusSquare />
+                </button>
+                <input 
+                  className="input-pet-name input-space" 
+                  type="text" 
+                  placeholder="Nome do Pet" 
+                  name="petName"
+                  onChange={(e) => validateFields(e)  || ''}
+                  value={client.petName || ''}  
+                />
+              </div>
+              <div className="content-pet-continues">
+                <input 
+                  className="input-pet-type input-space" 
+                  type="text" 
+                  placeholder="Tipo do Pet" 
+                  name="petType"
+                  onChange={(e) => validateFields(e)  || ''}
+                  value={client.petType || ''}  
+                />
+                <input 
+                  className="input-pet-breed input-space" 
+                  type="text" 
+                  placeholder="Raça do Pet" 
+                  name="breed"
+                  onChange={(e) => validateFields(e)  || ''}
+                  value={client.breed || ''}  
+                />
+              </div>
+            </div>
+            <div className="item-pet">
+              <div className="content-pet-name">
+                <button className="delete-pet">
+                  <AiFillMinusSquare />
+                </button>
+                <input 
+                  className="input-pet-name input-space" 
+                  type="text" 
+                  placeholder="Nome do Pet" 
+                  name="petName"
+                  onChange={(e) => validateFields(e)  || ''}
+                  value={client.petName || ''}  
+                />
+              </div>
+              <div className="content-pet-continues">
+                <input 
+                  className="input-pet-type input-space" 
+                  type="text" 
+                  placeholder="Tipo do Pet" 
+                  name="petType"
+                  onChange={(e) => validateFields(e)  || ''}
+                  value={client.petType || ''}  
+                />
+                <input 
+                  className="input-pet-breed input-space" 
+                  type="text" 
+                  placeholder="Raça do Pet" 
+                  name="breed"
+                  onChange={(e) => validateFields(e)  || ''}
+                  value={client.breed || ''}  
+                />
+              </div>
+            </div>
+            <div className="item-pet">
+              <div className="content-pet-name">
+                <button className="delete-pet">
+                  <AiFillMinusSquare size="15" />
+                </button>
+                <input 
+                  className="input-pet-name input-space" 
+                  type="text" 
+                  placeholder="Nome do Pet" 
+                  name="petName"
+                  onChange={(e) => validateFields(e)  || ''}
+                  value={client.petName || ''}  
+                />
+              </div>
+              <div className="content-pet-continues">
+                <input 
+                  className="input-pet-type input-space" 
+                  type="text" 
+                  placeholder="Tipo do Pet" 
+                  name="petType"
+                  onChange={(e) => validateFields(e)  || ''}
+                  value={client.petType || ''}  
+                />
+                <input 
+                  className="input-pet-breed input-space" 
+                  type="text" 
+                  placeholder="Raça do Pet" 
+                  name="breed"
+                  onChange={(e) => validateFields(e)  || ''}
+                  value={client.breed || ''}  
+                />
+              </div>
+            </div>
+          </div>
         </div>
         <div className="btns-form">
           <button className="btn-cancel">Cancelar</button>

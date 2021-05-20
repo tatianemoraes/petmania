@@ -11,7 +11,7 @@ export const Container = styled.div`
   .form {
     display: flex;
     flex-direction: column;
-    height: 560px;
+    height: 615px;
     width: 515px;
     margin-top: 40px;
     background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
@@ -41,6 +41,7 @@ export const Container = styled.div`
       justify-content: center;
       flex-direction: column;
       margin-top: 10px;
+      margin-left: 50px;
 
       label {
         margin-bottom: 5px;
@@ -60,6 +61,50 @@ export const Container = styled.div`
         ::placeholder {
           color: #f7f7f7;
         }
+      }
+
+      .add-pet {
+        display: flex;
+        align-items: baseline;
+        margin-bottom:20px;
+
+        .btn-add {
+          cursor: pointer;
+          background: none;
+          border: none;
+        }
+
+        h2 {
+          margin-left: 10px;
+          color: #9C7FFD;
+        }
+      }
+      
+      .list-pet {
+        max-height: 180px;
+        height: 100%;
+        overflow: auto;
+        .content-pet-name {
+
+          .delete-pet {
+            margin-right: 20px;
+            background: none;
+            border: none;
+          }
+
+          .input-pet-name {
+            width: 370px !important;
+          }
+
+        }
+
+        .content-pet-continues {
+          input {
+            width: 370px;
+            margin-left: 37px;
+          }
+        }
+
       }
 
       .input-space {
