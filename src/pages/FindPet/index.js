@@ -46,6 +46,13 @@ export default function FindPet() {
     }
   }, [pet])
 
+  function clearPetAfterSearch(e) {
+    if(e.target.value === '') {
+      setPetSearch([]);
+    }
+  }
+
+
   return (
     <Container>
       <Header />
@@ -56,7 +63,7 @@ export default function FindPet() {
             type="text" 
             placeholder="Pesquisar Pet"
             value={ pet.petName || '' }
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => {handleChange(e); clearPetAfterSearch(e)}}
           />
         </div>
         <div className="results">

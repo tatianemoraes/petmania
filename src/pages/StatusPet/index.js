@@ -16,7 +16,6 @@ import { GiBarbedNails } from 'react-icons/gi';
 
 export default function StatusPet() {
 
-// o que acha de quando for pro client essa tela aparecer o nome do pet a raça e o tipo do pet?
   const { user } = useContext(useEmployeeContext);
 
   const [petStatus, setPetStatus] = useState({ petName: '' });
@@ -43,7 +42,13 @@ export default function StatusPet() {
     if(petStatus.petName.length > 2) {
       findPetStatus(petStatus);
     }
-  }, [petStatus])
+  }, [petStatus]); 
+
+  function clearPetAfterSearch(e) {
+    if(e.target.value === '') {
+      setPetSearch([]);
+    }
+  }
 
   return (
     <Container>
@@ -55,7 +60,7 @@ export default function StatusPet() {
             type="text" 
             placeholder='Pesquisar Pet' 
             value={ petStatus.petName || '' }
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => {handleChange(e); clearPetAfterSearch(e)}}
           />
         </div>
         <div className="response-pet-status">
